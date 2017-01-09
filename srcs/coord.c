@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:42 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 18:24:42 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 18:35:26 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 #include <stdlib.h>
 #include <math.h>
 
-int				coord(void)
+int				coord(t_fdf *fdf)
 {
 	int		i;
 
 	i = 0;
-	if (!(g_fdf->x = malloc(sizeof(int) * g_fdf->size)) ||
-	!(g_fdf->y = malloc(sizeof(int) * g_fdf->size)))
+	if (!(fdf->x = malloc(sizeof(int) * fdf->size)) ||
+	!(fdf->y = malloc(sizeof(int) * fdf->size)))
 		return (err_ret("an error has occured", 0));
-	while (i < g_fdf->size)
+	while (i < fdf->size)
 	{
-		g_fdf->x[i] = (i % g_fdf->width - i / g_fdf->width) * g_fdf->factor +
-		(0.025 * SIZE) + (g_fdf->size / g_fdf->width - 1) * g_fdf->factor;
-		g_fdf->y[i] = (i % g_fdf->width + i / g_fdf->width) * g_fdf->factor -
-		g_fdf->height[i] * (0.1 * g_fdf->factor) + (0.025 * SIZE);
+		fdf->x[i] = (i % fdf->width - i / fdf->width) * fdf->factor +
+		(0.025 * SIZE) + (fdf->size / fdf->width - 1) * fdf->factor;
+		fdf->y[i] = (i % fdf->width + i / fdf->width) * fdf->factor -
+		fdf->height[i] * (0.1 * fdf->factor) + (0.025 * SIZE);
 		i++;
 	}
 	return (1);

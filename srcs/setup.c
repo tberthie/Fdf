@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:19:22 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 18:21:59 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 18:32:59 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,49 +51,50 @@ int				getnbr(int *ptr, char *str)
 	return (1);
 }
 
-int				newline(char *line)
+int				newline(t_fdf *fdf, char *line)
 {
 	char	**tab;
 	int		alt;
 
 	if (!(tab = ft_strsplit(line, ' ')) || ft_tablen(tab) == 0 ||
-	(g_fdf->width != 0 && ft_tablen(tab) != g_fdf->width))
+	(fdf->width != 0 && ft_tablen(tab) != fdf->width))
 		return (0);
-	g_fdf->width == 0 ? g_fdf->width = ft_tablen(tab) : 0;
+	fdf->width == 0 ? fdf->width = ft_tablen(tab) : 0;
 	while (*tab)
 	{
 		if (!getnbr(&alt, *tab++) ||
-		!(g_fdf->height = insert(alt, g_fdf->height, g_fdf->size)))
+		!(fdf->height = insert(alt, fdf->height, fdf->size)))
 			return (0);
-		g_fdf->size++;
+		fdf->size++;
 	}
 	return (1);
 }
 
-int				setup(char *str)
+t_fdf			*setup(char *str)
 {
+	t_fdf	*fdf;
 	int		fd;
 	char	*line;
 
 	if ((fd = open(str, O_RDONLY)) == -1 ||
-	!(g_fdf = malloc(sizeof(t_fdf))))
+	!(fdf = malloc(sizeof(t_fdf))))
 	{
 		err_ret(str, 0);
 		return (0);
 	}
-	g_fdf->width = 0;
-	g_fdf->size = 0;
-	g_fdf->height = 0;
+	fdf->width = 0;
+	fdf->size = 0;
+	fdf->height = 0;
 	while (ft_gnl(fd, &line))
 	{
-		if (!newline(line))
+		if (!newline(fdf, line))
 		{
 			write(2, "fdf: map invalid\n", 17);
 			return (0);
 		}
 		free(line);
 	}
-	g_fdf->factor = SIZE / (g_fdf->size / g_fdf->width);
-	!g_fdf->size ? write(2, "fdf: map invalid\n", 17) : 0;
-	return (g_fdf->size);
+	fdf->factor = SIZE / (fdf->size / fdf->width);
+	!fdf->size ? write(2, "fdf: map invalid\n", 17) : 0;
+	return (fdf->size) ? fdf : 0;
 }
