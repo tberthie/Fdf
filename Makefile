@@ -2,6 +2,7 @@ SRCS = main.c \
 	   setup.c \
 	   utl.c \
 	   run.c \
+	   coord.c \
 	   draw.c
 
 OBJS = $(addprefix srcs/,$(SRCS:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:19:22 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 14:02:09 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:24:32 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,10 @@ int				newline(char *line)
 	g_fdf->width == 0 ? g_fdf->width = ft_tablen(tab) : 0;
 	while (*tab)
 	{
-		if (!getnbr(&alt, *tab) ||
-		!(g_fdf->coords = insert(alt, g_fdf->coords, g_fdf->size)))
+		if (!getnbr(&alt, *tab++) ||
+		!(g_fdf->height = insert(alt, g_fdf->height, g_fdf->size)))
 			return (0);
 		g_fdf->size++;
-		tab++;
 	}
 	return (1);
 }
@@ -84,7 +83,7 @@ int				setup(char *str)
 	}
 	g_fdf->width = 0;
 	g_fdf->size = 0;
-	g_fdf->coords = 0;
+	g_fdf->height = 0;
 	while (ft_gnl(fd, &line))
 	{
 		if (!newline(line))

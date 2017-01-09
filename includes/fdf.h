@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:49:09 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 14:03:22 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:58:01 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 typedef struct		s_fdf
 {
-	int		*coords;
+	int		*height;
+	int		*x;
+	int		*y;
+
 	int		width;
 	int		size;
 
@@ -28,6 +31,7 @@ t_fdf				*g_fdf;
 int					setup(char *str);
 void				run(void);
 void				draw(void);
+int					coord(void);
 
 int					err_ret(char *str, int ret);
 
