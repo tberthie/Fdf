@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:18:22 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 17:02:06 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 17:48:51 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,15 @@
 int			bind(int keycode, void *param)
 {
 	param = 0;
-	if (keycode == 53)
+/*	if (keycode == 13)
+		g_fdf->py -= 10;
+	else if (keycode == 0)
+		g_fdf->px -= 10;
+	else if (keycode == 1)
+		g_fdf->py += 10;
+	else if (keycode == 2)
+		g_fdf->px += 10;
+*/	if (keycode == 53)
 		exit(1);
 	return (1);
 }
@@ -33,7 +41,7 @@ int			expose(void *param)
 void		run(void)
 {
 	if ((g_fdf->mlx = mlx_init()) &&
-	(g_fdf->win = mlx_new_window(g_fdf->mlx, 1920, 1080, "hi")))
+	(g_fdf->win = mlx_new_window(g_fdf->mlx, 1000, 1000, "hi")))
 	{
 		draw();
 		mlx_key_hook(g_fdf->win, bind, 0);

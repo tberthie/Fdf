@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:42 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 16:51:27 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 18:05:08 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ int				coord(void)
 		return (err_ret("an error has occured", 0));
 	while (i < g_fdf->size)
 	{
-		g_fdf->x[i] = i % g_fdf->width * 10 - i / g_fdf->width * 10;
-		g_fdf->y[i] = i % g_fdf->width * 10 + i / g_fdf->width * 10 -
-		g_fdf->height[i];
+		g_fdf->x[i] = (i % g_fdf->width - i /
+		g_fdf->width) * SIZE;
+		g_fdf->y[i] = (i % g_fdf->width + i /
+		g_fdf->width) * SIZE - g_fdf->height[i];
 		i++;
 	}
 	return (1);
