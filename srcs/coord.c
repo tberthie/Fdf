@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:10:42 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 18:35:26 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 19:30:21 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int				coord(t_fdf *fdf)
 	{
 		fdf->x[i] = (i % fdf->width - i / fdf->width) * fdf->factor +
 		(0.025 * SIZE) + (fdf->size / fdf->width - 1) * fdf->factor;
-		fdf->y[i] = (i % fdf->width + i / fdf->width) * fdf->factor -
-		fdf->height[i] * (0.1 * fdf->factor) + (0.025 * SIZE);
+		fdf->y[i] = (i % fdf->width + i / fdf->width) *
+		fdf->factor + (0.025 * SIZE);
 		i++;
 	}
 	return (1);

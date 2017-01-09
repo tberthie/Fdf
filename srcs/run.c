@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:18:22 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 18:36:57 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 19:15:05 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,22 @@
 
 int			bind(int keycode, void *param)
 {
-	param = 0;
-/*	if (keycode == 13)
-		fdf->py -= 10;
-	else if (keycode == 0)
-		fdf->px -= 10;
-	else if (keycode == 1)
-		fdf->py += 10;
-	else if (keycode == 2)
-		fdf->px += 10;
-*/	if (keycode == 53)
+	t_fdf	*fdf;
+
+	fdf = param;
+	if (keycode == 13 || keycode == 1)
+		fdf->posy += keycode == 13 ? (SIZE * 0.1) : -(SIZE * 0.1);
+	else if (keycode == 0 || keycode == 2)
+		fdf->posx += keycode == 0 ? (SIZE * 0.1) : -(SIZE * 0.1);
+	else if (keycode == 69 || keycode == 78)
+		fdf->zoom += keycode == 69 ? 0.1 : -0.1;
+	else if (keycode == 24 || keycode == 27)
+		fdf->depth += keycode == 24 ? 0.1 : -0.1;
+	else if (keycode == 53)
 		exit(1);
+	else
+		return (1);
+	draw(fdf);
 	return (1);
 }
 

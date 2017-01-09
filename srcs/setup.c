@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:19:22 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 18:32:59 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 19:31:17 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,32 @@ int				newline(t_fdf *fdf, char *line)
 		if (!getnbr(&alt, *tab++) ||
 		!(fdf->height = insert(alt, fdf->height, fdf->size)))
 			return (0);
+		alt > fdf->top ? fdf->top = alt : 0;
+		alt < fdf->bottom ? fdf->bottom = alt : 0;
 		fdf->size++;
 	}
 	return (1);
+}
+
+t_fdf			*init(void)
+{
+	t_fdf	*fdf;
+
+	if (!(fdf = malloc(sizeof(t_fdf))))
+		return (0);
+	fdf->width = 0;
+	fdf->size = 0;
+	fdf->height = 0;
+	fdf->zoom = 1;
+	fdf->depth = 1;
+	fdf->posx = 0;
+	fdf->posy = 0;
+	fdf->colors[0] = TOP;
+	fdf->colors[1] = MID;
+	fdf->colors[2] = BOTTOM;
+	fdf->top = 0;
+	fdf->bottom = 0;
+	return (fdf);
 }
 
 t_fdf			*setup(char *str)
@@ -77,14 +100,11 @@ t_fdf			*setup(char *str)
 	char	*line;
 
 	if ((fd = open(str, O_RDONLY)) == -1 ||
-	!(fdf = malloc(sizeof(t_fdf))))
+	!(fdf = init()))
 	{
 		err_ret(str, 0);
 		return (0);
 	}
-	fdf->width = 0;
-	fdf->size = 0;
-	fdf->height = 0;
 	while (ft_gnl(fd, &line))
 	{
 		if (!newline(fdf, line))
