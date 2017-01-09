@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:19:22 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 19:31:17 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 20:40:43 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,24 @@ int				newline(t_fdf *fdf, char *line)
 {
 	char	**tab;
 	int		alt;
+	int		i;
 
+	i = 0;
 	if (!(tab = ft_strsplit(line, ' ')) || ft_tablen(tab) == 0 ||
 	(fdf->width != 0 && ft_tablen(tab) != fdf->width))
 		return (0);
 	fdf->width == 0 ? fdf->width = ft_tablen(tab) : 0;
-	while (*tab)
+	while (tab[i])
 	{
-		if (!getnbr(&alt, *tab++) ||
+		if (!getnbr(&alt, tab[i]) ||
 		!(fdf->height = insert(alt, fdf->height, fdf->size)))
 			return (0);
+		free(tab[i++]);
 		alt > fdf->top ? fdf->top = alt : 0;
 		alt < fdf->bottom ? fdf->bottom = alt : 0;
 		fdf->size++;
 	}
+	free(tab);
 	return (1);
 }
 
@@ -114,6 +118,7 @@ t_fdf			*setup(char *str)
 		}
 		free(line);
 	}
+	free(line);
 	fdf->factor = SIZE / (fdf->size / fdf->width);
 	!fdf->size ? write(2, "fdf: map invalid\n", 17) : 0;
 	return (fdf->size) ? fdf : 0;

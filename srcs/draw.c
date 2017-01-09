@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:02:28 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 20:26:35 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 20:39:07 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			getcolor(t_fdf *fdf, float height)
 		if (height > 0 && fdf->top)
 			return (gradient(fdf->colors[1], fdf->colors[0], height /
 			(fdf->top * fdf->depth)));
-		if (height < 0 && fdf->bottom)
+		else if (height < 0 && fdf->bottom)
 			return (gradient(fdf->colors[1], fdf->colors[2], height /
 			(fdf->bottom * fdf->depth)));
 	}
@@ -46,7 +46,7 @@ int			getcolor(t_fdf *fdf, float height)
 		if (height > 0 && fdf->bottom)
 			return (gradient(fdf->colors[1], fdf->colors[0], height /
 			(fdf->bottom * fdf->depth)));
-		if (height < 0 && fdf->top)
+		else if (height < 0 && fdf->top)
 			return (gradient(fdf->colors[1], fdf->colors[2], height /
 			(fdf->top * fdf->depth)));
 	}
@@ -82,15 +82,18 @@ void		line(t_fdf *fdf, int i, int diff)
 void		draw(t_fdf *fdf)
 {
 	int		i;
+	char	*tmp;
 
 	i = 0;
 	mlx_clear_window(fdf->mlx, fdf->win);
 	mlx_string_put(fdf->mlx, fdf->win, 0, 0, 0xffffff0, "ZOOM");
 	mlx_string_put(fdf->mlx, fdf->win, 45, 0, 0x00ff000,
-	ft_itoa(fdf->zoom * 100));
+	(tmp = ft_itoa(fdf->zoom * 100)));
+	free(tmp);
 	mlx_string_put(fdf->mlx, fdf->win, 0, 20, 0xffffff0, "DEPTH");
 	mlx_string_put(fdf->mlx, fdf->win, 55, 20, 0x00ff000,
-	ft_itoa(fdf->depth * 100));
+	(tmp = ft_itoa(fdf->depth * 100)));
+	free(tmp);
 	while (i < fdf->size)
 	{
 		if (i % fdf->width)
