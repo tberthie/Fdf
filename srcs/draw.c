@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:02:28 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 18:24:49 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 18:26:28 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ void		line(int i, int diff)
 	while (j <= ds)
 	{
 		mlx_pixel_put(g_fdf->mlx, g_fdf->win,
-		
 		g_fdf->x[i - diff] + dx * (j / ds),
 		g_fdf->y[i - diff] + dy * (j / ds),
-		
 		0xffffff0);
 		j++;
 	}
