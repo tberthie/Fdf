@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:18:22 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 17:48:51 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 18:23:27 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ int			expose(void *param)
 
 void		run(void)
 {
+	int		wins;
+
+	wins = ((g_fdf->size / g_fdf->width - 1) +
+	g_fdf->width - 1) * g_fdf->factor + 0.05 * SIZE;
 	if ((g_fdf->mlx = mlx_init()) &&
-	(g_fdf->win = mlx_new_window(g_fdf->mlx, 1000, 1000, "hi")))
+	(g_fdf->win = mlx_new_window(g_fdf->mlx, wins, wins, "hi")))
 	{
 		draw();
 		mlx_key_hook(g_fdf->win, bind, 0);

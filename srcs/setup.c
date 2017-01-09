@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:19:22 by tberthie          #+#    #+#             */
-/*   Updated: 2017/01/09 17:52:42 by tberthie         ###   ########.fr       */
+/*   Updated: 2017/01/09 18:21:59 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int				setup(char *str)
 		}
 		free(line);
 	}
+	g_fdf->factor = SIZE / (g_fdf->size / g_fdf->width);
 	!g_fdf->size ? write(2, "fdf: map invalid\n", 17) : 0;
 	return (g_fdf->size);
 }
